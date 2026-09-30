@@ -1,0 +1,240 @@
+:root {
+  --bg: #f6f5f2;
+  --surface: #ffffff;
+  --text: #222222;
+  --muted: #6b6b6b;
+  --border: #d6d3cc;
+  --accent: #3a6ea5;
+  --accent-dark: #2d5885;
+  --spin: #e76f51;
+  --spin-dark: #cf5a3d;
+  --danger: #c0392b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.title {
+  margin: 8px 0 20px;
+  font-size: 28px;
+  text-align: center;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Варианты */
+
+.add-form {
+  display: flex;
+  gap: 8px;
+}
+
+.add-input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  /* 16px, чтобы iPhone не увеличивал страницу при фокусе */
+  font-size: 16px;
+}
+
+.add-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.button {
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.add-button {
+  padding: 10px 16px;
+  background: var(--accent);
+}
+
+.add-button:not(:disabled):hover {
+  background: var(--accent-dark);
+}
+
+.hint {
+  min-height: 1.4em;
+  margin: 6px 0 4px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.option-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 4px 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.option-color {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.option-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.remove-button {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--danger);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.remove-button:not(:disabled):hover {
+  background: #f3dcd8;
+}
+
+.remove-button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Колесо */
+
+.wheel-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.wheel-box {
+  position: relative;
+  width: min(100%, 420px);
+  padding-top: 14px;
+  /* Повёрнутый квадрат картинки не должен вылезать за рамку */
+  overflow: hidden;
+}
+
+.pointer {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 28px solid var(--text);
+}
+
+.wheel {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: rotate(0deg);
+  pointer-events: none;
+}
+
+.wheel.is-spinning {
+  /* Быстро в начале, плавное замедление к концу */
+  transition: transform 3.5s cubic-bezier(0.15, 0.6, 0.15, 1);
+}
+
+.spin-button {
+  min-width: 200px;
+  padding: 14px 32px;
+  border-radius: 999px;
+  background: var(--spin);
+  font-size: 20px;
+}
+
+.spin-button:not(:disabled):hover {
+  background: var(--spin-dark);
+}
+
+.result {
+  min-height: 80px;
+  text-align: center;
+}
+
+.result-label {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.result-value {
+  font-size: 36px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+/* Широкий экран: список слева, колесо справа */
+
+@media (min-width: 760px) {
+  .layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .options {
+    flex: 1;
+  }
+
+  .wheel-area {
+    flex: 1.3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wheel.is-spinning {
+    transition-duration: 1s;
+  }
+}
