@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Колесо решений</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <h1 class="title">Колесо решений</h1>
+
+    <div class="layout">
+      <section class="options" aria-label="Варианты">
+        <form class="add-form" id="add-form">
+          <input
+            class="add-input"
+            id="option-input"
+            type="text"
+            maxlength="40"
+            placeholder="Новый вариант"
+            aria-label="Новый вариант"
+            autocomplete="off"
+          >
+          <button class="button add-button" id="add-button" type="submit">Добавить</button>
+        </form>
+        <p class="hint" id="hint"></p>
+        <ul class="option-list" id="option-list"></ul>
+      </section>
+
+      <section class="wheel-area" aria-label="Колесо">
+        <div class="wheel-box">
+          <div class="pointer" aria-hidden="true"></div>
+          <svg class="wheel" id="wheel" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
+        </div>
+        <button class="button spin-button" id="spin-button" type="button" disabled>Крутить</button>
+        <div class="result" id="result" aria-live="polite"></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
